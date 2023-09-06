@@ -1,6 +1,6 @@
 # RGB
 
-- An implementation for Benchmarking Large Language Models in Retrieval-Augmented Generation 
+- An implementation for [Benchmarking Large Language Models in Retrieval-Augmented Generation](https://arxiv.org/abs/2309.01431) 
 
 ## Quick links
 
