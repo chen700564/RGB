@@ -49,7 +49,6 @@ For evaluating other models, you can run as:
 python evalue.py \
 --dataset en \
 --modelname chatglm2-6b \
---plm THUDM/chatglm2-6b \
 --temp 0.2 \
 --noise_rate 0.6 \
 --plm THUDM/chatglm-6b 
