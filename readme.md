@@ -59,30 +59,3 @@ You should change `modelname` and `plm` for different models, where `plm` is the
 `temp` is the temperature of model.
 
 `noise_rate` is rate of noisy documents in inputs.
-
-The outputs are:
-+ all_rate: The accuracy (noise_rate<1) or rejection rate (noise_rate=1)
-+ fact_check_rate: the error detection rates (ED)
-+ correct_rate: the error correction rate (CR)
-
----
-
-To evaluate rejection using ChatGPT, you should first run the `evalue.py` in noise_rate=1 to obtain the generation result, and then run:
-```bash
-python reject_evalue.py \
---dataset en \
---modelname chatglm2-6b \
---api_key YourAPIKEY
-```
-The "reject_rate" in the outputs are the reject rate (Rej\*).
-
----
-
-To evaluate counterfactual robustness using ChatGPT, you should first run the `evalue.py` in dataset=en_fact/zh_fact to obtain the generation result, and then run:
-```bash
-python fact_evalue.py \
---dataset en \
---modelname chatglm2-6b \
---api_key YourAPIKEY
-```
-The "ed" in the outputs are the error detection rates (ED\*).
