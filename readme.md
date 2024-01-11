@@ -30,6 +30,11 @@ data/
 └── zh_fact.json
 ```
 
+To evalute the Information Integration, you should use `zh_int` or `en_int` for Chinese questions or English questions. 
+
+To evalute the Counterfactual Robustness, you should use `zh_fact` or `en_fact` for Chinese questions or English questions. 
+
+
 ### Evaluation
 
 For evaluating ChatGPT, you can run as:
@@ -81,7 +86,7 @@ The "reject_rate" in the outputs are the reject rate (Rej\*).
 To evaluate counterfactual robustness using ChatGPT, you should first run the `evalue.py` in dataset=en_fact/zh_fact to obtain the generation result, and then run:
 ```bash
 python fact_evalue.py \
---dataset en \
+--dataset en_fact \
 --modelname chatglm2-6b \
 --api_key YourAPIKEY
 ```
