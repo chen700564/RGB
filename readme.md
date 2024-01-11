@@ -68,7 +68,6 @@ You should change `modelname` and `plm` for different models, where `plm` is the
 The outputs are:
 + all_rate: The accuracy (noise_rate<1) or rejection rate (noise_rate=1)
 + fact_check_rate: the error detection rates (ED)
-+ correct_rate: the error correction rate (CR)
 
 ---
 
@@ -90,4 +89,4 @@ python fact_evalue.py \
 --modelname chatglm2-6b \
 --api_key YourAPIKEY
 ```
-The "ed" in the outputs are the error detection rates (ED\*).
+The "reject_rate" in the outputs are the error detection rates (ED\*). The `correct_rate` in the outputs are the error correction rate (CR)
