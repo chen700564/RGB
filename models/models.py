@@ -31,6 +31,38 @@ class Qwen:
         response, history = self.model.chat(self.tokenizer, text, history=None)
         return response
 
+class Qwen2:
+    def __init__(self, plm = 'Qwen/Qwen1.5-7B-Chat') -> None:
+        self.plm = plm
+        self.tokenizer = AutoTokenizer.from_pretrained(plm, trust_remote_code=True)
+        self.model = AutoModelForCausalLM.from_pretrained(plm, device_map="auto", trust_remote_code=True).eval()
+
+    def generate(self, text, temperature=0.8, system="", top_p=0.8):
+        messages = []
+        if len(system) > 0:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": text})
+        
+        text = self.tokenizer.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True
+        )
+        model_inputs = self.tokenizer([text], return_tensors="pt").to(self.model.device)
+        generated_ids = self.model.generate(
+            model_inputs.input_ids,
+            max_new_tokens=512,
+            temperature=temperature,
+            top_p=top_p,
+        )
+        generated_ids = [
+            output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
+        ]
+
+        response = self.tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+        return response
+
+
 class Baichuan:
     def __init__(self, plm = 'baichuan-inc/Baichuan-13B-Chat') -> None:
         self.plm = plm
