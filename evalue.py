@@ -21,15 +21,16 @@ def processdata(instance, noise_rate, passage_num, filename, correct_rate = 0):
             random.shuffle(i)
         print(len(instance['positive']))
         docs = [i[0] for i in instance['positive']]
-        maxnum = max([len(i) for i in instance['positive']])
-        for i in range(1,maxnum):
-            for j in instance['positive']:
-                if len(j) > i:
-                    docs.append(j[i])
-                    if len(docs) == pos_num:
-                        break
-            if len(docs) == pos_num:
-                break
+        if len(docs) < pos_num:
+            maxnum = max([len(i) for i in instance['positive']])
+            for i in range(1,maxnum):
+                for j in instance['positive']:
+                    if len(j) > i:
+                        docs.append(j[i])
+                        if len(docs) == pos_num:
+                            break
+                if len(docs) == pos_num:
+                    break
         neg_num = passage_num - len(docs)
         if neg_num > 0:
             negative = instance['negative'][:neg_num]
